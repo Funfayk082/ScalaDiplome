@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="create Volunteer table" author="Andrey">
+        <preConditions onFail="CONTINUE">
+            <not>
+                <tableExists tableName="Volunteer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="Volunteer">
+            <column name="id" type="numeric" autoIncrement="true" incrementBy="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contact_number" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create Order table" author="Andrey">
+        <preConditions>
+            <not>
+                <tableExists tableName="Order"/>
+            </not>
+        </preConditions>
+        <createTable tableName="Order">
+            <column name="id" type="numeric" autoIncrement="true" incrementBy="1">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="city_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commentary" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="geolocation" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="address" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create Answer table" author="Andrey">
+        <preConditions>
+            <not>
+                <tableExists tableName="Answer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="Answer">
+            <column name="id" type="numeric" autoIncrement="true" incrementBy="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="volunteer_id" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Answer"
+                                 baseColumnNames="order_id"
+                                 constraintName="fk_Order_id_Answer_order_id"
+                                 referencedTableName="Order"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="Answer"
+                                 baseColumnNames="volunteer_id"
+                                 constraintName="fk_Volunteer_id_Answer_volunteer_id"
+                                 referencedTableName="Volunteer"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

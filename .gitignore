@@ -1,6 +1,9 @@
 .bsp
-/.idea
+.idea
 target
 project/project
 project/target
 logs
+modules/db/target
+modules/di/target
+modules/hnapi/target
