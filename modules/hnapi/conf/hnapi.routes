@@ -1,1 +1,8 @@
-GET     /   @controllers.OrderController.test
+GET     /order             @controllers.OrderController.findOrdersByCityName(cityName: String ?= "")
+POST    /order             @controllers.OrderController.addOrder
+GET     /order/me          @controllers.OrderController.findOrdersByVolunteer
+
+POST    /answer/complete   @controllers.AnswerController.updateAnswer(orderId: Long)
+POST    /answer/add        @controllers.AnswerController.addAnswer
+
+POST    /register          @controllers.VolunteerController.register

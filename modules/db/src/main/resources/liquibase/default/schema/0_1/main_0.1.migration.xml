@@ -36,7 +36,7 @@
             <column name="id" type="numeric" autoIncrement="true" incrementBy="1">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="city_name" type="text">
+            <column name="cityName" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="commentary" type="text">
